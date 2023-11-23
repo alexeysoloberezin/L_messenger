@@ -1,12 +1,12 @@
 'use client';
 
-import {signOut} from 'next-auth/react'
+import MainLayout from '../(site)/layouts/main';
+import Avatar from "@/app/(site)/components/Avatar";
 
 const Users = () => {
     return ( 
-        <div>
-            <div>Hello users</div>
-            <button onClick={() => signOut()}>Logout</button>
+        <div className="text-white">
+          Chat
         </div>
      );
 }

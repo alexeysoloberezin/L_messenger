@@ -3,13 +3,11 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
 import neverCheck from "@/app/utils/neverCheck";
-import { log } from 'console';
 import Input from './Input';
 import Button from './Button';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { signIn, useSession } from 'next-auth/react';
-import AuthSocialButton from './AuthSocialButtonGitHub';
 import AuthSocialButtonGoogle from './AuthSocialButtonGoogle';
 import AuthSocialButtonGitHub from './AuthSocialButtonGitHub';
 import { useRouter } from 'next/navigation'
