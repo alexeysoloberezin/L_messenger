@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {signOut, useSession} from "next-auth/react";
 import Avatar from "@/app/(site)/components/Avatar";
+import getCurrentUser from "@/app/actions/getCurrentUser";
 
 type Props = {};
 export const Header = (props: Props) => {
@@ -31,7 +32,7 @@ export const Header = (props: Props) => {
             <div className="flex items-center ">
               <div className="text-white mx-3 font-medium text-lg">{ session?.user?.name || session?.user.email }</div>
 
-              <Avatar user={session?.user?.image} />
+              <Avatar user={session?.user} />
 
               <button
                 onClick={() => signOut()}

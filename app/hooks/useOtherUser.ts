@@ -1,18 +1,24 @@
-import {FullConversationType} from "@/app/types";
-import {User} from "next-auth";
-import {useSession} from "next-auth/react";
-import {useMemo} from "react";
+import { FullConversationType } from "@/app/types";
+import { User } from "next-auth";
+import { useSession } from "next-auth/react";
+import { useMemo } from "react";
 
-const useOtherUser = (conversation: FullConversationType | {
-  users: User[]
-}) => {
-  const session = useSession()
+type OtherUserType = User;
+
+const useOtherUser = (
+  conversation: FullConversationType | {
+    users: User[];
+  }
+): OtherUserType => {
+  const session = useSession();
 
   return useMemo(() => {
-    const currentUserEmail = session?.data?.user?.email
+    const currentUserEmail = session?.data?.user?.email;
 
-    return conversation.users.filter(user => user.email !== currentUserEmail)
-  }, [session?.data?.user?.email, conversation.users])
-}
+    const user = conversation.users.filter((user) => user.email !== currentUserEmail);
 
-export default useOtherUser
+    return user[0]
+  }, [session?.data?.user?.email, conversation.users]);
+};
+
+export default useOtherUser;

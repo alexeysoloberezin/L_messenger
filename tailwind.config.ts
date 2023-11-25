@@ -9,6 +9,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        spaceGray: {
+          "400": "#293348",
+          "450": "#222c3d",
+          "500": "#1F2937",
+          "550": "#1a242f",
+          "650": "#17202a",
+          "700": "#141d25"
+        },
+        gray: {
+          "750": "#313a49"
+        },
         primary: {
           "50": "#eff6ff",
           "100": "#dbeafe",

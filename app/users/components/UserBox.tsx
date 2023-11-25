@@ -27,24 +27,24 @@ const UserBox: React.FC<UserListProps> = ({user}) => {
   }, [user, router])
 
   return (
-    <li onClick={handleClick} className="py-3 px-4 sm:py-4 cursor-pointer hover:bg-gray-900">
-      <div class="flex items-center">
-        <div class="flex-shrink-0">
+    <div onClick={handleClick} className="py-3 px-4 sm:py-4 cursor-pointer hover:bg-gray-900">
+      <div className="flex items-center">
+        <div className="flex-shrink-0">
           <Avatar user={user}/>
         </div>
-        <div class="flex-1 min-w-0 ms-4">
-          <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+        <div className="flex-1 min-w-0 ms-4">
+          <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
             {user.name}
           </p>
-          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+          <p className="text-sm text-gray-500 truncate dark:text-gray-400">
             {user.email}
           </p>
         </div>
-        <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+        <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
           STATUS**
         </div>
       </div>
-    </li>
+    </div>
   );
 };
 

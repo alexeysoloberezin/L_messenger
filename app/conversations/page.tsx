@@ -6,7 +6,6 @@ import useConversation from "@/app/hooks/useConversation";
 const ConversationsPage = () => {
   const { isOpen } = useConversation()
 
-
   return (
     <div>
       empty

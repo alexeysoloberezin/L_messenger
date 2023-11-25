@@ -4,6 +4,7 @@ import React, {useState} from 'react';
 import {FullConversationType} from "@/app/types";
 import {useRouter} from "next/navigation";
 import useConversation from "@/app/hooks/useConversation";
+import ConversationBox from "@/app/conversations/components/ConversationBox";
 
 type ConversationsListProps = {
   initialItems: FullConversationType[]
@@ -18,7 +19,9 @@ const ConversationsList: React.FC<ConversationsListProps> = ({ initialItems }) =
 
   return (
     <div>
-      {JSON.stringify(items)}
+      {items.map(item => (
+        <ConversationBox data={item} key={item.id} selected={conversationId === item.id}/>
+      ))}
     </div>
   );
 };

@@ -12,7 +12,7 @@ type UserListProps = {
 
 const UserList: React.FC<UserListProps> = ({users}) => {
   return (
-    <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+    <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
       {users.map(user => (
         <UserBox user={user} key={user.id}/>
       ))}
