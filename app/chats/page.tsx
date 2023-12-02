@@ -10,7 +10,6 @@ type Props = {
 const Chats = (props: Props) => {
   return (
     <MainLayout>
-
       <div>
         chats
       </div>

@@ -8,6 +8,20 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        rightToLeft: {
+          '0%': { transform: 'translateX(105%)' },
+          '100%': { transform: 'translateX(0%)' },
+        },
+        fromBottom: {
+          '0%': { transform: 'translateY(100px)' },
+          '100%': { transform: 'translateY(0)' },
+        },
+        opacityMy: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        }
+      },
       colors: {
         spaceGray: {
           "400": "#293348",

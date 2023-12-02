@@ -41,7 +41,7 @@ const UserBox: React.FC<UserListProps> = ({user}) => {
           </p>
         </div>
         <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-          STATUS**
+          {/*STATUS***/}
         </div>
       </div>
     </div>

@@ -1,23 +1,23 @@
 'use client';
 
-import React, {useMemo, useState} from 'react';
+import React, {useMemo} from 'react';
 import {FullConversationType} from "@/app/types";
-import { Conversation, User } from '@prisma/client'
 import useOtherUser from "@/app/hooks/useOtherUser";
 import clsx from "clsx";
 import Avatar from "@/app/(site)/components/Avatar";
-import { BsThreeDots } from "react-icons/bs";
 import ProfileDrawer from "@/app/(site)/components/ProfileDrawer";
+import useActiveList from "@/app/hooks/useActiveList";
+import StatusUser from "@/app/(site)/components/StatusUser";
+
 type HeaderConvProps = {
   conversation: FullConversationType
 }
 
-const HeaderConv: React.FC<HeaderConvProps> = ({ conversation }) => {
+const HeaderConv: React.FC<HeaderConvProps> = ({conversation}) => {
   const otherUser = useOtherUser(conversation)
 
-
   const statusText = useMemo(() => {
-    if(conversation.isGroup){
+    if (conversation.isGroup) {
       return `${conversation.users.length} members`
     }
 
@@ -31,14 +31,24 @@ const HeaderConv: React.FC<HeaderConvProps> = ({ conversation }) => {
       `)}
     >
       <div className={'flex items-center gap-3'}>
-        <Avatar user={otherUser} />
-        <p className="text-md font-medium text-gray-900 truncate dark:text-white">
-          {otherUser?.name || otherUser?.email}
-        </p>
+        <Avatar user={otherUser} users={conversation.isGroup ? conversation.users : []}/>
+
+        <div>
+          <p className="text-md font-medium text-gray-900 truncate dark:text-white">
+            {
+              conversation?.isGroup
+                ? 'Group Chat: ' + conversation.users.length + ' members'
+                : otherUser?.name || otherUser?.email
+            }
+          </p>
+          <StatusUser email={otherUser.email}/>
+        </div>
+
       </div>
-      <div >
-        <ProfileDrawer />
-        <BsThreeDots />
+      <div>
+        {otherUser && (
+          <ProfileDrawer user={otherUser} users={conversation.users}/>
+        )}
       </div>
     </div>
   );

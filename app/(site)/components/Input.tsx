@@ -9,12 +9,15 @@ interface InputProps {
   id: string;
   type?: string;
   required?: boolean;
-  register: UseFormRegister<FieldValues>;
-  errors: FieldErrors;
+  register: UseFormRegister<FieldValues> | null;
+  errors?: FieldErrors;
   disabled?: boolean;
 }
 
-const Input: React.FC<InputProps> = ({ label, id, type = "text", required, register, errors, disabled }) => {
+const Input: React.FC<InputProps> = ({ label, id, type = "text", required , register, errors, disabled }) => {
+
+  const reg = register === null ? {} :  {...register(id, { required: required || false })}
+
   return (
     <div>
       {label && (
@@ -29,14 +32,14 @@ const Input: React.FC<InputProps> = ({ label, id, type = "text", required, regis
         id={id}
         className={clsx(
           "bg-gray-50 border border-gray-300 outline-none focus:border-spaceGray-650 transition text-gray-900 sm:text-sm rounded   block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white ",
-          { "border-red-500": errors[id] },
+          { "border-red-500": errors && errors[id] },
           { "opacity-50": disabled }
         )}
         placeholder={`Enter your ${label.toLowerCase()}`}
-        {...register(id, { required })}
+        {...reg}
         disabled={disabled}
       />
-      {errors[id] && (
+      {errors && errors[id] && (
         <p className="text-red-500 text-sm mt-1">{label} is required.</p>
       )}
     </div>

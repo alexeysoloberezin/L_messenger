@@ -1,23 +1,27 @@
 import React from 'react';
+import clsx from "clsx";
 
 interface ButtonProps {
   disabled?: boolean;
   loading?: boolean;
   children: any;
-  className: string;
+  className?: string;
+  onClick?: Function;
   type?: 'submit' | 'button'
-  color?: 'primary' | 'danger'; 
+  color?: 'primary' | 'red';
 }
 
-const Button: React.FC<ButtonProps> = ({ disabled, loading, children,className, color = 'primary', type = 'button' }) => {
-  const buttonClasses = `${className} text-white font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none ${
-    disabled || loading ? 'bg-gray-500 opacity-50 cursor-not-allowed' : `bg-primary-700 hover:bg-primary-800 dark:focus:ring-primary-800 dark:hover:bg-primary-700 focus:ring-4 focus:ring-primary-300`
-  } dark:bg-primary-600`;
+const Button: React.FC<ButtonProps> = ({ disabled,onClick, loading, children,className, color = 'primary', type = 'button' }) => {
 
   return (
     <button
+      onClick={onClick}
       type={type}
-      className={buttonClasses}
+      className={clsx(
+        `text-white font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none bg-primary-600`,
+        className,
+        disabled || loading ? 'bg-gray-500 opacity-50 cursor-not-allowed' : `bg-primary-700 hover:bg-primary-800  focus:ring-4 focus:ring-primary-300`
+      )}
       disabled={disabled || loading}
     >
       {loading ? 'Loading...' : children || 'Submit'}

@@ -1,6 +1,6 @@
 'use client';
 
-import React, {useCallback, useMemo} from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 import {FullConversationType} from "@/app/types";
 import useOtherUser from "@/app/hooks/useOtherUser";
 import {useSession} from "next-auth/react";
@@ -9,6 +9,8 @@ import Avatar from "@/app/(site)/components/Avatar";
 import {User} from "next-auth";
 import {format} from 'date-fns'
 import clsx from "clsx";
+import {AiOutlineLoading3Quarters} from "react-icons/ai";
+import Dot from "@/app/(site)/components/Dot";
 
 type ConversationProps = {
   data: FullConversationType,
@@ -17,12 +19,14 @@ type ConversationProps = {
 
 const ConversationBox: React.FC<ConversationProps> = ({data, selected}) => {
   const otherUser = useOtherUser(data)
-
+  const [loading, setLoading] = useState(false)
   const session = useSession()
   const router = useRouter()
 
-  const handleClick = useCallback(() => {
-    router.push('/conversations/' + data.id)
+  const handleClick = useCallback(async () => {
+    setLoading(true)
+    await router.push('/conversations/' + data.id)
+    setLoading(false)
   }, [router, data.id])
 
   const lastMessage = useMemo(() => {
@@ -60,18 +64,24 @@ const ConversationBox: React.FC<ConversationProps> = ({data, selected}) => {
     return "Started a conversation"
   }, [lastMessage])
 
-  console.log('otherUser', otherUser)
+  if(data.isGroup){
+    console.log('data', data.isGroup, data)
+  }
 
   return (
-    <div onClick={handleClick} className="py-3 px-4 sm:py-4 cursor-pointer hover:bg-gray-900">
-      <div className="flex items-center">
+    <div onClick={handleClick} className="relative">
+      <div className={clsx("flex items-center py-3 px-4 sm:py-4 ", loading ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer hover:bg-gray-900')}>
         <div className="flex-shrink-0">
-          <Avatar user={otherUser}/>
+          <Avatar user={otherUser} users={data.isGroup ? data.users : []}/>
         </div>
         <div className="flex-1 min-w-0 ms-4">
           <div className="flex items-center gap-2">
             <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-              {otherUser.name || otherUser.email}
+              {
+                data.isGroup
+                  ? 'Group Chat'
+                  : otherUser.name || otherUser.email
+              }
             </p>
             {lastMessage?.createdAt && (
               <div className="text-sm text-white">{format(new Date(lastMessage.createdAt), 'p')}</div>
@@ -79,15 +89,15 @@ const ConversationBox: React.FC<ConversationProps> = ({data, selected}) => {
           </div>
           <p className={clsx("text-sm text-gray-900 truncate dark:text-white flex items-center gap-1", !hasSeen && 'font-medium')} >
             {!hasSeen && (
-              <span class="relative flex h-2 w-2 ml-1">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
-              </span>
+              <Dot />
             )}
             {lastMessageText}
           </p>
         </div>
       </div>
+      {loading && (
+        <div className={'animate-spin absolute top-[50%] left-[50%] z-5 text-white'}><AiOutlineLoading3Quarters /></div>
+      )}
     </div>
   );
 };
