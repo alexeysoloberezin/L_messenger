@@ -2,6 +2,7 @@ import * as React from 'react';
 import {signOut, useSession} from "next-auth/react";
 import Avatar from "@/app/(site)/components/Avatar";
 import getCurrentUser from "@/app/actions/getCurrentUser";
+import Image from "next/image";
 
 type Props = {};
 export const Header = (props: Props) => {
@@ -23,7 +24,7 @@ export const Header = (props: Props) => {
               </svg>
             </button>
             <a href="https://flowbite.com" className="flex ms-2 md:me-24">
-              <img src="/logo.png" className="h-8 me-3" alt="FlowBite Logo"/>
+              <Image src="/logo.png" width={40} height={60} className="h-8 me-3" alt="FlowBite Logo"/>
               <span
                 className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">L_messenger</span>
             </a>

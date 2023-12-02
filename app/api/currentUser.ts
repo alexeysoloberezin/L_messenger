@@ -1,22 +1,24 @@
 import prisma from '@/app/libs/prismadb';
-import {useSession} from "next-auth/react";
+import getSession from "@/app/actions/getSession";
 
 export default async function handler(req, res) {
-  const { data:session } = useSession()
+  const session = await getSession();
 
   if(!session?.user?.email){
     res.status(200).json(null)
+    return;
   }
 
-  const currentUser = await prisma.user.findUnique({
-    where: {
-      email: session.user.email as string
-    }
-  });
+  try {
+    const currentUser = await prisma.user.findUnique({
+      where: {
+        email: session.user.email as string,
+      },
+    });
 
-  if(!currentUser){
-    res.status(200).json(null)
+    res.status(200).json({ currentUser });
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
-
-  res.status(200).json({ currentUser });
 }

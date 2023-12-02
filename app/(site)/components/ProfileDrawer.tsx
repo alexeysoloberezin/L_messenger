@@ -21,21 +21,23 @@ type ProfileDrawerProps = {
 }
 
 const ProfileDrawer: React.FC<ProfileDrawerProps> = ({user,users, children}) => {
-  const [drawerOpen, setDrawerOpen] = useState(false)
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const modalRef = useRef<any>(null);
-  const [loading, setLoading] = useState(false)
-  const { conversationId } = useConversation()
-  const router = useRouter()
+  const [loading, setLoading] = useState(false);
+  const { conversationId } = useConversation();
+  const router = useRouter();
 
-  const handleOpenDrawer = () => setDrawerOpen(true)
-  const handleCloseDrawer = () => setDrawerOpen(false)
+  const handleOpenDrawer = () => setDrawerOpen(true);
+  const handleCloseDrawer = useCallback(() => setDrawerOpen(false), []);
 
-
-  const handleClickOutside = (event) => {
-    if (modalRef.current && !modalRef.current.contains(event.target)) {
-      handleCloseDrawer();
-    }
-  };
+  const handleClickOutside = useCallback(
+    (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        handleCloseDrawer();
+      }
+    },
+    [handleCloseDrawer]
+  );
 
   const deleteConversation = useCallback(() => {
     setLoading(true)
@@ -58,7 +60,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({user,users, children}) => 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [drawerOpen]);
+  }, [drawerOpen, handleClickOutside]);
 
   console.log(user)
 
@@ -113,7 +115,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({user,users, children}) => 
                   {users?.length > 2 ? (
                     <>
                       {
-                        users.map(user =>  <UserBox user={user} />)
+                        users.map(user =>  <UserBox user={user} key={user.id} />)
                       }
 
                       <hr className="h-px w-full block border-0 bg-gray-600"/>

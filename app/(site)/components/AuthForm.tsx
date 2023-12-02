@@ -11,6 +11,7 @@ import { signIn, useSession } from 'next-auth/react';
 import AuthSocialButtonGoogle from './AuthSocialButtonGoogle';
 import AuthSocialButtonGitHub from './AuthSocialButtonGitHub';
 import { useRouter } from 'next/navigation'
+import Image from "next/image";
 
 type Variant = "LOGIN" | "REGISTER"
 
@@ -123,7 +124,7 @@ const AuthForm = () => {
     <section className="">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-          <img className="w-12 h-12 mr-2" src="/logo.png" alt="logo" />
+          <Image width={100} height={50} className="w-12 h-12 mr-2" src="/logo.png" alt="logo" />
             L_messenger
         </a>
         <div
