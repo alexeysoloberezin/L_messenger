@@ -1,8 +1,8 @@
 import prisma from '@/app/libs/prismadb';
 import getSession from "@/app/actions/getSession";
 
-export default async function handler(req, res) {
-  const session = await getSession();
+export default async function handler(req: any, res: any) {
+  const session: any = await getSession();
 
   if(!session?.user?.email){
     res.status(200).json(null)

@@ -13,37 +13,38 @@ interface SelectProps {
   required?: boolean;
   onChange: (value: Record<string, any>) => void;
   disabled?: boolean;
+  value?: any;
   multiple?: boolean;
 }
 
 const darkThemeStyles = {
-  container: (provided) => ({
+  container: (provided: any) => ({
     ...provided,
     color: 'white', // Text color
   }),
-  control: (provided, state) => ({
+  control: (provided: any, state: any) => ({
     ...provided,
     backgroundColor: 'rgb(55,65,81)', // Control background color
     borderColor: '#4B5563', // Control border color
   }),
-  option: (provided, state) => ({
+  option: (provided: any, state: any) => ({
     ...provided,
     backgroundColor: state.isSelected ? 'rgb(63,73,91)' : 'rgb(55,65,81)', // Selected and default option background color
     color: state.isSelected ? 'white' : 'inherit', // Selected and default option text color
   }),
-  singleValue: (provided) => ({
+  singleValue: (provided: any) => ({
     ...provided,
     color: 'white', // Selected value text color
   }),
-  multiValue: (provided) => ({
+  multiValue: (provided: any) => ({
     ...provided,
     backgroundColor: '#4B5563', // Multi-value tag background color
   }),
-  multiValueLabel: (provided) => ({
+  multiValueLabel: (provided: any) => ({
     ...provided,
     color: 'white', // Multi-value tag text color
   }),
-  multiValueRemove: (provided) => ({
+  multiValueRemove: (provided: any) => ({
     ...provided,
     color: 'white', // Multi-value tag remove button color
   }),

@@ -28,7 +28,7 @@ const Form = () => {
     }
   })
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: any) => {
     setLoading(true)
     setValue('message', '', { shouldValidate: true });
     axios.post('/api/messages', {

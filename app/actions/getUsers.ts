@@ -1,10 +1,11 @@
 import prisma from '@/app/libs/prismadb'
 import getSession from "@/app/actions/getSession";
+import {User} from "next-auth";
 
-const getUsers = async () => {
-  const session = await getSession()
+const getUsers = async (): Promise<User[] | []> => {
+  const session: any = await getSession()
 
-  if(!session?.user?.email){
+  if (!session?.user?.email) {
     return [];
   }
 
@@ -20,9 +21,9 @@ const getUsers = async () => {
       }
     })
 
-    return users
-  }catch (err){
-
+    return users || []
+  } catch (err) {
+    return []
   }
 }
 

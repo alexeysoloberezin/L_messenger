@@ -49,6 +49,7 @@ const CreateGroupChat: React.FC<{users: OptionSelect[]}> = ({users}) => {
       .finally(() => setIsLoading(false))
   }
 
+  const [selectedValue, setSelectedValue] = useState(members);
 
   return (
    <div>

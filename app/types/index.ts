@@ -8,6 +8,7 @@ export type FullMessageType = Message & {
 
 export type FullConversationType = Conversation & {
   id: string;
+  isGroup: boolean;
   users: User[];
   messages: FullMessageType[];
 };

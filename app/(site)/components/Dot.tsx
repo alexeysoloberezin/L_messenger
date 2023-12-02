@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from "clsx";
 
-const Dot: React.FC<{ classes: string }> = ({classes}) => {
+const Dot: React.FC<{ classes?: string }> = ({classes}) => {
   return (
     <span className={clsx(classes)}>
       <span className="relative flex h-2 w-2 ml-1">

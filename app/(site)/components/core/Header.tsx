@@ -1,15 +1,14 @@
 import * as React from 'react';
 import {signOut, useSession} from "next-auth/react";
-import Avatar from "@/app/(site)/components/Avatar";
-import getCurrentUser from "@/app/actions/getCurrentUser";
 import Image from "next/image";
+import Avatar from "@/app/(site)/components/Avatar";
 
 type Props = {};
 export const Header = (props: Props) => {
   const { data:session } = useSession()
 
   return (
-    <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+    <div className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
       <div className="px-3 py-3 lg:px-5 lg:pl-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-start rtl:justify-end">
@@ -31,7 +30,7 @@ export const Header = (props: Props) => {
           </div>
           <div className="flex items-center">
             <div className="flex items-center ">
-              <div className="text-white mx-3 font-medium text-lg">{ session?.user?.name || session?.user.email }</div>
+              <div className="text-white mx-3 font-medium text-lg">{ session?.user?.name || session?.user?.email || 'Unknown user' }</div>
 
               <Avatar user={session?.user} />
 
@@ -45,6 +44,6 @@ export const Header = (props: Props) => {
           </div>
         </div>
       </div>
-    </nav>
+    </div>
   );
 };

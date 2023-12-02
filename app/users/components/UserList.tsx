@@ -7,7 +7,7 @@ import Link from "next/link";
 import UserBox from "@/app/users/components/UserBox";
 
 type UserListProps = {
-  users: User[]
+  users: User[] | []
 }
 
 const UserList: React.FC<UserListProps> = ({users}) => {

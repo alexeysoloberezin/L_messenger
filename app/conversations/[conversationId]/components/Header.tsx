@@ -6,7 +6,6 @@ import useOtherUser from "@/app/hooks/useOtherUser";
 import clsx from "clsx";
 import Avatar from "@/app/(site)/components/Avatar";
 import ProfileDrawer from "@/app/(site)/components/ProfileDrawer";
-import useActiveList from "@/app/hooks/useActiveList";
 import StatusUser from "@/app/(site)/components/StatusUser";
 
 type HeaderConvProps = {

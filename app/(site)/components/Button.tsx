@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {MouseEventHandler} from 'react';
 import clsx from "clsx";
 
 interface ButtonProps {
@@ -6,7 +6,7 @@ interface ButtonProps {
   loading?: boolean;
   children: any;
   className?: string;
-  onClick?: Function;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
   type?: 'submit' | 'button'
   color?: 'primary' | 'red';
 }

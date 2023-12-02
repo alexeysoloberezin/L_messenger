@@ -5,6 +5,7 @@ import getMessages from "@/app/actions/getMessages";
 import HeaderConv from "@/app/conversations/[conversationId]/components/Header";
 import BodyConv from "@/app/conversations/[conversationId]/components/Body";
 import Form from "@/app/conversations/[conversationId]/components/Form";
+import {FullConversationType, FullMessageType} from "@/app/types";
 
 type IParams = {
   conversationId: string
@@ -22,9 +23,9 @@ const ConversationIdPage = async ({ params }: {params: IParams}) => {
 
   return (
     <div className="text-white h-withoutHeader" style={{ display: 'flex', flexDirection: 'column' }}>
-      <HeaderConv conversation={conversation} />
+      <HeaderConv conversation={conversation as FullConversationType} />
       <div style={{ flex: 1, overflowY: 'auto' }} className="bg-spaceGray-550 ">
-        <BodyConv initialMessages={messages} />
+        <BodyConv initialMessages={messages as FullMessageType[]} />
       </div>
       <Form />
     </div>

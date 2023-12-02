@@ -3,7 +3,7 @@ import getSession from "@/app/actions/getSession";
 import {User} from "next-auth";
 
 const getCurrentUser = async (): Promise<User | null> => {
-  const session = await getSession()
+  const session: any = await getSession()
 
   if(!session?.user?.email){
     return null

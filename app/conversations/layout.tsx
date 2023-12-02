@@ -4,8 +4,9 @@ import getConversations from "@/app/actions/getConversations";
 import MainLayout from "@/app/(site)/layouts/main";
 import ConversationsPage from "@/app/conversations/page";
 import getUsers from "@/app/actions/getUsers";
+import {OptionSelect} from "@/app/(site)/components/Select/MySelect";
 
-const ConversationLayout = async ({ children }) => {
+const ConversationLayout = async ({ children }: { children: React.ReactNode }) => {
   const conversations = await getConversations()
   const users = await getUsers()
 
@@ -13,7 +14,7 @@ const ConversationLayout = async ({ children }) => {
     <div>
       <MainLayout
         list={<ConversationsList initialItems={conversations}/>}
-        users={users.map(user => ({ label: user.name, value: user.id }))}
+        users={users.map(user => ({ label: user.name, value: user.id }) as OptionSelect)}
       >
         <div>
           {children}

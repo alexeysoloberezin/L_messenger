@@ -5,7 +5,6 @@ import {FullConversationType} from "@/app/types";
 import {useRouter} from "next/navigation";
 import useConversation from "@/app/hooks/useConversation";
 import ConversationBox from "@/app/conversations/components/ConversationBox";
-import {session} from "next-auth/core/routes";
 import {useSession} from "next-auth/react";
 import pusherClient from "@/app/libs/pusher/pusherClient";
 import {find} from "lodash";

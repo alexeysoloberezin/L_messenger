@@ -1,8 +1,9 @@
 import {useSession} from "next-auth/react";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import prisma from '@/app/libs/prismadb'
+import {FullConversationType} from "@/app/types";
 
-const getConversations = async () => {
+const getConversations = async (): Promise<FullConversationType[] | []> => {
   const currentUser = await getCurrentUser()
 
   if (!currentUser?.id) {
@@ -10,7 +11,7 @@ const getConversations = async () => {
   }
 
   try {
-    const conversations = await prisma.conversation.findMany({
+    const conversations: any = await prisma.conversation.findMany({
       orderBy: {
         lastMessageAt: 'desc'
       },
@@ -30,9 +31,8 @@ const getConversations = async () => {
       }
     })
 
-    return conversations
+    return conversations || []
   } catch (err) {
-    // console.log(err, 'comv er')
     return []
   }
 }

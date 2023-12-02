@@ -11,7 +11,7 @@ const Avatar: React.FC<{ user: any, users?: any[] }> = ({user, users}) => {
 
   return (
     <div>
-      {users?.length > 2 ? (
+      {Array.isArray(users) && users?.length > 2 ? (
         <div className="flex items-center -space-x-4 rtl:space-x-reverse">
           {users.slice(0, 2).map(el => (
             el?.image ? (

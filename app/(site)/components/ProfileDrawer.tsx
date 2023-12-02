@@ -1,6 +1,6 @@
 'use client';
 
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState, MouseEvent} from 'react';
 import {User} from "next-auth";
 import {BsThreeDots} from "react-icons/bs";
 import Avatar from "@/app/(site)/components/Avatar";
@@ -15,7 +15,7 @@ import UserBox from "@/app/users/components/UserBox";
 import StatusUser from "@/app/(site)/components/StatusUser";
 
 type ProfileDrawerProps = {
-  user: User,
+  user: any,
   users: any[],
   children?: React.ReactNode
 }
@@ -31,7 +31,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({user,users, children}) => 
   const handleCloseDrawer = useCallback(() => setDrawerOpen(false), []);
 
   const handleClickOutside = useCallback(
-    (event) => {
+    (event: any) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
         handleCloseDrawer();
       }
